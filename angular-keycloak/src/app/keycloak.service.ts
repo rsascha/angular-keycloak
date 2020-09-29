@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 
 declare var Keycloak: any;
 
@@ -20,7 +20,7 @@ export class KeycloakService {
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = 'http://localhost:8080/auth/js/keycloak.js';
-      document.getElementsByName('head')[0].appendChild(script);
+      document.getElementsByTagName('head')[0].appendChild(script);
       script.onload = () => {
         resolve(
           new Keycloak({
@@ -41,6 +41,14 @@ export class KeycloakService {
         .then((keycloak) => {
           this._keycloak$.next(keycloak);
         });
+    });
+  }
+
+  public isInitialized(): Promise<void> {
+    return new Promise((resolve) => {
+      this.keycloak$.subscribe(() => {
+        resolve();
+      });
     });
   }
 

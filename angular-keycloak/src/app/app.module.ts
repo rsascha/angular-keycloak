@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { DoBootstrap, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,19 +9,26 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
+import { KeycloakService } from './keycloak.service';
+
+const keycloak = new KeycloakService();
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  //bootstrap: [AppComponent],
+  entryComponents: [AppComponent],
 })
-export class AppModule { }
+export class AppModule implements DoBootstrap {
+  async ngDoBootstrap(app) {
+    await keycloak.isInitialized();
+    app.bootstrap(AppComponent);
+  }
+}
