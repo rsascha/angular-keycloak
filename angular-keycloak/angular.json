@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-keycloak"
+    }
+  },
+  "defaultProject": "angular-keycloak",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
