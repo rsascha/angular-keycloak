@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
 declare var Keycloak: any;
 
@@ -10,9 +10,15 @@ declare var Keycloak: any;
 export class KeycloakService {
   private _keycloak$ = new BehaviorSubject<any>(null);
   private keycloak$ = this._keycloak$.pipe(filter((k) => !!k));
+  private firstInitCallOnly = false;
 
   constructor() {
-    this.initKeycloak();
+    console.log(`KeycloakService - ctor`);
+    if (!this.firstInitCallOnly) {
+      this.firstInitCallOnly = true;
+      console.log(`KeycloakService - initKeycloak()`);
+      this.initKeycloak();
+    }
   }
 
   private initKeycloak(): Promise<any> {
@@ -44,15 +50,25 @@ export class KeycloakService {
     });
   }
 
-  public isInitialized(): Promise<void> {
+  public isInitialized(): Promise<boolean> {
     return new Promise((resolve) => {
-      this.keycloak$.subscribe(() => {
-        resolve();
+      this.keycloak$.subscribe((initialized) => {
+        console.log(`initialized: ${initialized}`);
+        if (initialized) {
+          console.log(`resolve: ${initialized}`);
+          resolve(true);
+        }
       });
     });
   }
 
   public getUserName(): Observable<string> {
-    return of('DUMMY');
+    return this._keycloak$.pipe(
+      filter((keycloak) => keycloak),
+      map((keycloak) => {
+        console.log(`Keycloak: ${keycloak}`);
+        return 'Wurst';
+      })
+    );
   }
 }

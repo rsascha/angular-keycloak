@@ -11,8 +11,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { KeycloakService } from './keycloak.service';
 
-const keycloak = new KeycloakService();
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -28,7 +26,10 @@ const keycloak = new KeycloakService();
 })
 export class AppModule implements DoBootstrap {
   async ngDoBootstrap(app) {
-    await keycloak.isInitialized();
+    // console.log(`DoBootstrap - before await keycloak.isInitialized()`);
+    // const keycloak = new KeycloakService();
+    // await keycloak.isInitialized();
+    // console.log(`DoBootstrap - after await keycloak.isInitialized()`);
     app.bootstrap(AppComponent);
   }
 }
