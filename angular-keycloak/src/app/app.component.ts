@@ -10,14 +10,12 @@ import { KeycloakService } from './keycloak.service';
 })
 export class AppComponent {
   title = 'angular-keycloak';
-
-  constructor(private keycloak: KeycloakService) {}
+  loginName$: Observable<string>;
+  constructor(private keycloak: KeycloakService) {
+    this.loginName$ = this.keycloak.getUserName();
+  }
 
   get loginNameTest$(): Observable<string> {
     return of('Test User');
-  }
-
-  get loginName$(): Observable<string> {
-    return this.keycloak.getUserName();
   }
 }

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import {Injectable, NgZone} from '@angular/core';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {filter, map, mergeMap, switchMap, take, tap} from 'rxjs/operators';
 
 declare var Keycloak: any;
 
@@ -8,17 +8,12 @@ declare var Keycloak: any;
   providedIn: 'root',
 })
 export class KeycloakService {
+  public isAuthenticated$ = new BehaviorSubject<boolean>(false);
   private _keycloak$ = new BehaviorSubject<any>(null);
   private keycloak$ = this._keycloak$.pipe(filter((k) => !!k));
-  private firstInitCallOnly = false;
 
-  constructor() {
-    console.log(`KeycloakService - ctor`);
-    if (!this.firstInitCallOnly) {
-      this.firstInitCallOnly = true;
-      console.log(`KeycloakService - initKeycloak()`);
-      this.initKeycloak();
-    }
+  constructor(private zone: NgZone) {
+    this.initKeycloak();
   }
 
   private initKeycloak(): Promise<any> {
@@ -37,38 +32,27 @@ export class KeycloakService {
         );
       };
     }).then((keycloak: any) => {
-      keycloak
+      return keycloak
         .init({
           onLoad: 'login-required',
           checkLoginIframe: false,
           enableLogging: true,
           responseMode: 'query',
         })
-        .then((keycloak) => {
+        .then((isAuthenticated) => {
           this._keycloak$.next(keycloak);
+          this.isAuthenticated$.next(isAuthenticated);
         });
     });
   }
 
-  public isInitialized(): Promise<boolean> {
-    return new Promise((resolve) => {
-      this.keycloak$.subscribe((initialized) => {
-        console.log(`initialized: ${initialized}`);
-        if (initialized) {
-          console.log(`resolve: ${initialized}`);
-          resolve(true);
-        }
-      });
-    });
-  }
 
   public getUserName(): Observable<string> {
-    return this._keycloak$.pipe(
-      filter((keycloak) => keycloak),
-      map((keycloak) => {
-        console.log(`Keycloak: ${keycloak}`);
-        return 'Wurst';
-      })
+    return this.keycloak$.pipe(
+      take(1),
+      switchMap(k => k.loadUserProfile()),
+      tap((u) => console.log('all userdata', u)),
+      map(({username}) => username)
     );
   }
 }
