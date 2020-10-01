@@ -19,19 +19,6 @@ export class KeycloakAuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        console.log(
-          `KeycloakAuthGuard - before await this.keycloak.isInitialized()`
-        );
-        const authenticated = await this.keycloak.isInitialized();
-        console.log(
-          `KeycloakAuthGuard - after await this.keycloak.isInitialized()`
-        );
-        resolve(authenticated);
-      } catch (error) {
-        reject('An error happened during access validation. Details:' + error);
-      }
-    });
+    return this.keycloak.isAuthenticated$.toPromise();
   }
 }
