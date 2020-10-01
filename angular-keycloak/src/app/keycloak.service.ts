@@ -1,6 +1,6 @@
-import {Injectable, NgZone} from '@angular/core';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
-import {filter, map, mergeMap, switchMap, take, tap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 
 declare var Keycloak: any;
 
@@ -12,7 +12,7 @@ export class KeycloakService {
   private _keycloak$ = new BehaviorSubject<any>(null);
   private keycloak$ = this._keycloak$.pipe(filter((k) => !!k));
 
-  constructor(private zone: NgZone) {
+  constructor() {
     this.initKeycloak();
   }
 
@@ -46,13 +46,11 @@ export class KeycloakService {
     });
   }
 
-
   public getUserName(): Observable<string> {
     return this.keycloak$.pipe(
       take(1),
-      switchMap(k => k.loadUserProfile()),
-      tap((u) => console.log('all userdata', u)),
-      map(({username}) => username)
+      switchMap((k) => k.loadUserProfile()),
+      map(({ username }) => username)
     );
   }
 }
