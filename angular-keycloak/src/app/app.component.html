@@ -1,3 +1,6 @@
 <p>Welcome to this sample app.</p>
 
 <div>loginName: {{ loginName$ | async }}</div>
+
+<button (click)="load()">Make API Call</button>
+<div *ngIf="(helloResponse$ | async)">loading ...</div>
