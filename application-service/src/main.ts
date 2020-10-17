@@ -21,6 +21,7 @@ async function bootstrap() {
     app.getUrl().then(url => {
         logger.log(`Service is listening on: ${url}`);
         logger.log(`Swagger is running on: ${url}/swagger`);
+        logger.log(`Open API data is provided on: ${url}/swagger-json`);
     });
 }
 bootstrap();
