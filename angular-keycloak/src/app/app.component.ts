@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
-import { HelloResponse } from 'src/apis/application-service'
-import { ApiActions, loadApi } from './app.actions'
+import { ApiActions } from './app.actions'
 import { ApiState } from './app.reducer'
 import { KeycloakService } from './keycloak.service'
 
@@ -16,12 +15,15 @@ export class AppComponent {
     title = 'angular-keycloak'
     loginName$: Observable<string>
     apiState$: Observable<boolean>
+    apiData$: Observable<string>
+
     constructor(
         private keycloak: KeycloakService,
         private store: Store<{ api: ApiState }>
     ) {
         this.loginName$ = this.keycloak.getUserName()
         this.apiState$ = this.store.select((state) => state.api.success)
+        this.apiData$ = this.store.select((state) => state.api.data)
     }
 
     load() {

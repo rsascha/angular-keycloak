@@ -3,4 +3,7 @@
 <div>loginName: {{ loginName$ | async }}</div>
 
 <button (click)="load()">Make API Call</button>
+
 <pre>-{{ apiState$ | async }}-</pre>
+
+<pre>-{{ apiData$ | async }}-</pre>

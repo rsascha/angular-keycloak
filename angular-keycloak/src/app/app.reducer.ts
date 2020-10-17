@@ -1,4 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store'
+import { HelloResponse } from 'src/apis/application-service'
 import * as ApiActions from './app.actions'
 
 export const appFeatureKey = 'app'
@@ -11,11 +12,13 @@ export interface ApiState {
     loading: boolean
     success: boolean
     error: boolean
+    data: string
 }
 export const initialApiState: ApiState = {
     loading: false,
     success: false,
     error: false,
+    data: null,
 }
 
 const apiReducer = createReducer(
@@ -24,9 +27,10 @@ const apiReducer = createReducer(
         ...state,
         loading: true,
     })),
-    on(ApiActions.loadApiSuccess, (state) => ({
+    on(ApiActions.loadApiSuccess, (state, { data }) => ({
         ...state,
         success: true,
+        data: data.data,
     })),
     on(ApiActions.loadApiError, (state) => ({
         ...state,
