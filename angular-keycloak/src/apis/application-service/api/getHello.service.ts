@@ -29,7 +29,7 @@ import { Configuration }                                     from '../configurat
 })
 export class GetHelloService {
 
-    protected basePath = 'http://localhost';
+    protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -114,7 +114,7 @@ export class GetHelloService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<HelloResponse>(`${this.configuration.basePath}/application-service/v1/app-controller/get-hello`,
+        return this.httpClient.get<HelloResponse>(`${this.configuration.basePath}/application-service/v1/app/get-hello`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

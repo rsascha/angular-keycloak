@@ -8,7 +8,7 @@ export class HelloResponse {
     data: string;
 }
 
-@Controller('app-controller')
+@Controller('app')
 export class AppController {
     constructor(private readonly appService: AppService) {}
 
