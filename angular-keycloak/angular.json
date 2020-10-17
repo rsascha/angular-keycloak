@@ -123,6 +123,7 @@
   },
   "defaultProject": "angular-keycloak",
   "cli": {
-    "defaultCollection": "@ngrx/schematics"
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": "389a5b32-4d51-4017-a75f-0cca272574a8"
   }
 }
