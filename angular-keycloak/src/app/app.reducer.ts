@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store'
-import { ApiActions } from '../app.actions'
+import { ApiActions } from './app.actions'
 
 export const appFeatureKey = 'app'
 
