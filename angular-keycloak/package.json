@@ -8,7 +8,8 @@
         "prettier": "prettier --write ./src",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e"
+        "e2e": "ng e2e",
+        "generate-api-application-service": "openapi-generator-cli generate --generator-name typescript-angular --input-spec http://localhost:3000/swagger-json --output src/apis/application-service/"
     },
     "private": true,
     "dependencies": {
@@ -33,6 +34,7 @@
         "@angular/cli": "~10.1.3",
         "@angular/compiler-cli": "~10.1.3",
         "@ngrx/schematics": "^10.0.0",
+        "@openapitools/openapi-generator-cli": "^2.0.3",
         "@types/jasmine": "~3.5.0",
         "@types/jasminewd2": "~2.0.3",
         "@types/node": "^12.11.1",
