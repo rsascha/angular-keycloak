@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects'
 import { of } from 'rxjs'
-import { catchError, map, switchMap } from 'rxjs/operators'
-import { HelloResponse } from 'src/apis/application-service'
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators'
+import { GetHelloService, HelloResponse } from 'src/apis/application-service'
 import { DefaultService } from 'src/apis/application-service/api/default.service'
 import { ApiActions, loadApiError, loadApiSuccess } from './app.actions'
 
@@ -10,18 +10,26 @@ import { ApiActions, loadApiError, loadApiSuccess } from './app.actions'
 export class AppEffects {
     constructor(
         private actions$: Actions,
-        private readonly defaultService: DefaultService
+        private readonly getHelloService: GetHelloService
     ) {}
 
-    loadApi = this.actions$.pipe(
-        ofType(ApiActions.Load),
-        switchMap((action) => {
-            return this.defaultService.appControllerGetHello().pipe(
-                map((response: HelloResponse) =>
-                    loadApiSuccess({ data: response })
-                ),
-                catchError((error) => of(loadApiError({ error: error })))
+    loadApi$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ApiActions.Load),
+            mergeMap(() =>
+                this.getHelloService.appControllerGetHello().pipe(
+                    map((response: HelloResponse) => ({
+                        type: ApiActions.LoadSuccess,
+                        payload: response,
+                    })),
+                    catchError((error) =>
+                        of({
+                            type: ApiActions.LoadError,
+                            payload: error,
+                        })
+                    )
+                )
             )
-        })
+        )
     )
 }

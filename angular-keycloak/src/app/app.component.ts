@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { HelloResponse } from 'src/apis/application-service'
 import { ApiActions, loadApi } from './app.actions'
+import { ApiState } from './app.reducer'
 import { KeycloakService } from './keycloak.service'
 
 @Component({
@@ -14,13 +15,13 @@ import { KeycloakService } from './keycloak.service'
 export class AppComponent {
     title = 'angular-keycloak'
     loginName$: Observable<string>
-    helloResponse$: Observable<HelloResponse>
+    apiState$: Observable<boolean>
     constructor(
         private keycloak: KeycloakService,
-        private store: Store<{ helloResponse: HelloResponse }>
+        private store: Store<{ api: ApiState }>
     ) {
         this.loginName$ = this.keycloak.getUserName()
-        this.helloResponse$ = this.store.select((state) => state.helloResponse)
+        this.apiState$ = this.store.select((state) => state.api.success)
     }
 
     load() {

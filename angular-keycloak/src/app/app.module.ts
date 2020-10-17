@@ -10,13 +10,14 @@ import { AppEffects } from './app.effects'
 import { ApiModule } from 'src/apis/application-service'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { EffectsModule } from '@ngrx/effects'
+import * as fromApi from './app.reducer'
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        StoreModule.forRoot(reducers, { metaReducers }),
+        StoreModule.forRoot({ api: fromApi.reducer }),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         EffectsModule.forRoot([AppEffects]),
         ApiModule,
