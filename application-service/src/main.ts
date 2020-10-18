@@ -13,6 +13,9 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule, {
         logger: config.logLevel,
     });
+    logger.log(
+        `Starting with LOG_LEVELS: ${config.logLevel} (possible values are: log,error,warn,debug,verbose)`,
+    );
 
     app.setGlobalPrefix('application-service/v1');
     app.enableCors();
