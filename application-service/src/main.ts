@@ -6,14 +6,19 @@ import { AppModule } from './app.module';
 import environment from './environment';
 
 async function bootstrap() {
-    const port = environment()['port'];
+    const config = environment();
+    const port = config.port;
     const logger = new Logger('bootstrap()');
-    const app = await NestFactory.create(AppModule);
+
+    const app = await NestFactory.create(AppModule, {
+        logger: config.logLevel,
+    });
+
     app.setGlobalPrefix('application-service/v1');
     app.enableCors();
 
     app.use((req: Request, res: Response, next: Function) => {
-        logger.debug(req.url);
+        logger.debug(`Incoming Request: ${req.url}`);
         next();
     });
 
@@ -22,7 +27,8 @@ async function bootstrap() {
         .setVersion('1.0')
         .addServer(`http://localhost:${port}`)
         .build();
-    logger.log(options);
+    logger.verbose(`Swagger Document Builder Options: ${options}`);
+
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('swagger', app, document);
 
