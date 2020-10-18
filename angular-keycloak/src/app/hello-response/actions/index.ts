@@ -1,3 +1,3 @@
-import * as LoadHelloResponseActions from './hello-response.actions'
+import * as HelloResponseActions from './hello-response.actions'
 
-export { LoadHelloResponseActions }
+export { HelloResponseActions }

@@ -1,6 +1,6 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromHelloResponse from '../reducers/hello-response.reducer';
+import { createFeatureSelector } from '@ngrx/store'
+import * as fromHelloResponse from '../reducers'
 
-export const selectHelloResponseState = createFeatureSelector<fromHelloResponse.State>(
-  fromHelloResponse.helloResponseFeatureKey
-);
+export const selectHelloResponseState = createFeatureSelector<
+    fromHelloResponse.HelloResponseState
+>(fromHelloResponse.helloResponseFeatureKey)

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, map, concatMap } from 'rxjs/operators'
-import { EMPTY, of } from 'rxjs'
+import { of } from 'rxjs'
 import { GetHelloService, HelloResponse } from 'src/apis/application-service'
-import * as HelloResponseActions from '../actions/hello-response.actions'
+import { HelloResponseActions } from '../actions/'
 
 @Injectable()
 export class HelloResponseEffects {
     _loadHelloResponses$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(HelloResponseActions.loadHelloResponses),
+            ofType(HelloResponseActions.enter),
             concatMap(() =>
                 this.getHelloService.getHello().pipe(
                     map(

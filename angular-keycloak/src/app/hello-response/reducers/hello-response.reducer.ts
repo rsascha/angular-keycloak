@@ -1,6 +1,5 @@
-import { Action, combineReducers, createReducer, on } from '@ngrx/store'
-import { HelloResponseState } from '.'
-import * as HelloResponseActions from '../actions/hello-response.actions'
+import { createReducer, on } from '@ngrx/store'
+import { HelloResponseActions } from '../actions/'
 
 export const helloResponseFeatureKey = 'helloResponse'
 
@@ -20,7 +19,7 @@ export const initialState: State = {
 
 export const reducer = createReducer(
     initialState,
-    on(HelloResponseActions.loadHelloResponses, (state) => ({
+    on(HelloResponseActions.enter, (state) => ({
         ...state,
         loading: true,
     })),

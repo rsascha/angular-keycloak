@@ -1,8 +1,6 @@
 import { createAction, props } from '@ngrx/store'
 
-export const loadHelloResponses = createAction(
-    '[HelloResponse] Load HelloResponses'
-)
+export const enter = createAction('[HelloResponse] Load HelloResponses')
 
 export const loadHelloResponsesSuccess = createAction(
     '[HelloResponse] Load HelloResponses Success',
