@@ -1,9 +1,13 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AppService {
-  private readonly logger = new Logger(AppService.name, true);
-  getHello(): string {
-    return 'Hello World!';
-  }
+    constructor(private readonly configService: ConfigService) {}
+
+    getHello(info: string): string {
+        return `Hello from ${
+            AppService.name
+        } at ${info} at :${this.configService.get('port')}`;
+    }
 }

@@ -5,12 +5,13 @@ import { AppService } from './app.service';
 import environment from './environment';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      load: [environment],
-    }),
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        ConfigModule.forRoot({
+            load: [environment],
+            isGlobal: true,
+        }),
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}
