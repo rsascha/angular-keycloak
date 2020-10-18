@@ -1,15 +1,15 @@
-import { createAction, props } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store'
 
 export const loadHelloResponses = createAction(
-  '[HelloResponse] Load HelloResponses'
-);
+    '[HelloResponse] Load HelloResponses'
+)
 
 export const loadHelloResponsesSuccess = createAction(
-  '[HelloResponse] Load HelloResponses Success',
-  props<{ data: any }>()
-);
+    '[HelloResponse] Load HelloResponses Success',
+    props<{ data: any }>()
+)
 
 export const loadHelloResponsesFailure = createAction(
-  '[HelloResponse] Load HelloResponses Failure',
-  props<{ error: any }>()
-);
+    '[HelloResponse] Load HelloResponses Failure',
+    props<{ error: boolean }>()
+)

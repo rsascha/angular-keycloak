@@ -9,6 +9,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
+        "pregenerate-api-application-service": "rm -rf",
         "generate-api-application-service": "openapi-generator-cli generate --generator-name typescript-angular --input-spec http://localhost:3000/swagger-json --output src/apis/application-service/"
     },
     "private": true,
