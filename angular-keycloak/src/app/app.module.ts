@@ -9,13 +9,14 @@ import { AppEffects } from './app.effects'
 import { ApiModule } from 'src/apis/application-service'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { EffectsModule } from '@ngrx/effects'
-import * as fromApi from './app.reducer';
-import { reducers, metaReducers } from './reducers';
-import * as fromHelloResponse from './hello-response/reducers/hello-response.reducer';
-import { HelloResponseEffects } from './hello-response/effects/hello-response.effects'
+import * as fromApi from './app.reducer'
+import { reducers, metaReducers } from './reducers'
+import * as fromHelloResponse from './hello-response/reducers/hello-response.reducer'
+import { HelloResponseEffects } from './hello-response/effects/hello-response.effects';
+import { HelloResponseComponent } from './hello-response/containers/hello-response/hello-response.component'
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, HelloResponseComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -25,7 +26,10 @@ import { HelloResponseEffects } from './hello-response/effects/hello-response.ef
         ApiModule,
         HttpClientModule,
         StoreModule.forRoot(reducers, { metaReducers }),
-        StoreModule.forFeature(fromHelloResponse.helloResponseFeatureKey, fromHelloResponse.reducer),
+        StoreModule.forFeature(
+            fromHelloResponse.helloResponseFeatureKey,
+            fromHelloResponse.reducer
+        ),
         EffectsModule.forFeature([HelloResponseEffects]),
     ],
     providers: [HttpClient],

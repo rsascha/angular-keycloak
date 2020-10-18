@@ -32,8 +32,7 @@ The 'HelloResponse' feature was generated like this:
 ```bash
 ng generate feature hello-response/HelloResponse --creators --module app --group --api --reducers ../reducers/index.ts
 
-
-
+ng generate container hello-response/containers/hello-response --state ../reducers/index.ts --stateInterface State
 ```
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
