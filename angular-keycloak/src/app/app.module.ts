@@ -9,7 +9,8 @@ import { AppEffects } from './app.effects'
 import { ApiModule } from 'src/apis/application-service'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { EffectsModule } from '@ngrx/effects'
-import * as fromApi from './app.reducer'
+import * as fromApi from './app.reducer';
+import { reducers, metaReducers } from './reducers'
 
 @NgModule({
     declarations: [AppComponent],
@@ -21,6 +22,7 @@ import * as fromApi from './app.reducer'
         EffectsModule.forRoot([AppEffects]),
         ApiModule,
         HttpClientModule,
+        StoreModule.forRoot(reducers, { metaReducers }),
     ],
     providers: [HttpClient],
     bootstrap: [AppComponent],
