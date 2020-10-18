@@ -12,11 +12,11 @@ import { EffectsModule } from '@ngrx/effects'
 import * as fromApi from './app.reducer'
 import { reducers, metaReducers } from './reducers'
 import * as fromHelloResponse from './hello-response/reducers/hello-response.reducer'
-import { HelloResponseEffects } from './hello-response/effects/hello-response.effects';
+import { HelloResponseEffects } from './hello-response/effects/hello-response.effects'
 import { HelloResponseComponent } from './hello-response/containers/hello-response/hello-response.component'
 
 @NgModule({
-    declarations: [AppComponent, HelloResponseComponent],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -26,11 +26,11 @@ import { HelloResponseComponent } from './hello-response/containers/hello-respon
         ApiModule,
         HttpClientModule,
         StoreModule.forRoot(reducers, { metaReducers }),
-        StoreModule.forFeature(
-            fromHelloResponse.helloResponseFeatureKey,
-            fromHelloResponse.reducer
-        ),
-        EffectsModule.forFeature([HelloResponseEffects]),
+        // StoreModule.forFeature(
+        //     fromHelloResponse.helloResponseFeatureKey,
+        //     fromHelloResponse.reducer
+        // ),
+        // EffectsModule.forFeature([HelloResponseEffects]),
     ],
     providers: [HttpClient],
     bootstrap: [AppComponent],
