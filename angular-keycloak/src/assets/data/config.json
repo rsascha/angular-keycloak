@@ -1,0 +1,8 @@
+{
+    "keycloak": {
+        "js": "http://localhost:8080/auth/js/keycloak.js",
+        "url": "http://localhost:8080/auth/",
+        "realm": "master",
+        "clientId": "angular-keycloak"
+    }
+}
