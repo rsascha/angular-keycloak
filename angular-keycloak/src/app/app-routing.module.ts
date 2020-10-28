@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core'
-import { Routes, RouterModule } from '@angular/router'
-import { AppComponent } from './app.component'
-import { KeycloakAuthGuard } from './keycloak-auth.guard'
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
+import { KeycloakAuthGuard } from './keycloak-auth.guard';
 
 const routes: Routes = [
     {
@@ -16,7 +16,7 @@ const routes: Routes = [
                 (m) => m.HelloResponseModule
             ),
     },
-]
+];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

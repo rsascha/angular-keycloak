@@ -1,1 +1,1 @@
-export * from './hello-response.effects'
+export * from './hello-response.effects';

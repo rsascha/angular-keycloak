@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core'
-import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { catchError, map, concatMap } from 'rxjs/operators'
-import { of } from 'rxjs'
-import { GetHelloService, HelloResponse } from 'src/apis/application-service'
-import { HelloResponseActions } from '../actions/'
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, map, concatMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { GetHelloService, HelloResponse } from 'src/apis/application-service';
+import { HelloResponseActions } from '../actions/';
 
 @Injectable()
 export class HelloResponseEffects {
@@ -28,7 +28,7 @@ export class HelloResponseEffects {
                 )
             )
         )
-    )
+    );
 
     constructor(
         private actions$: Actions,

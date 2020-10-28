@@ -1,3 +1,3 @@
-import * as LoadHelloResponseSelectors from './hello-response.selectors'
+import * as LoadHelloResponseSelectors from './hello-response.selectors';
 
-export { LoadHelloResponseSelectors }
+export { LoadHelloResponseSelectors };

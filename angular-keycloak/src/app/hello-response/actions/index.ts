@@ -1,3 +1,3 @@
-import * as HelloResponseActions from './hello-response.actions'
+import * as HelloResponseActions from './hello-response.actions';
 
-export { HelloResponseActions }
+export { HelloResponseActions };

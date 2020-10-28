@@ -6,20 +6,20 @@ import {
     combineReducers,
     createFeatureSelector,
     createSelector,
-} from '@ngrx/store'
-import * as fromHelloResponse from './hello-response.reducer'
-import * as fromRoot from '../../app.reducer'
+} from '@ngrx/store';
+import * as fromHelloResponse from './hello-response.reducer';
+import * as fromRoot from '../../app.reducer';
 
 // hmm ... ?
 // export const helloResponseFeatureKey = fromHelloResponse.helloResponseFeatureKey
-export const helloResponseFeatureKey = 'helloResponse'
+export const helloResponseFeatureKey = 'helloResponse';
 
 export interface HelloResponseState {
-    [fromHelloResponse.helloResponseFeatureKey]: fromHelloResponse.State
+    [fromHelloResponse.helloResponseFeatureKey]: fromHelloResponse.State;
 }
 
 export interface State extends fromRoot.State {
-    [helloResponseFeatureKey]: HelloResponseState
+    [helloResponseFeatureKey]: HelloResponseState;
 }
 
 export function reducers(
@@ -28,15 +28,15 @@ export function reducers(
 ) {
     return combineReducers({
         [fromHelloResponse.helloResponseFeatureKey]: fromHelloResponse.reducer,
-    })(state, action)
+    })(state, action);
 }
 
 export const selectHelloResponseState = createFeatureSelector<
     State,
     HelloResponseState
->(helloResponseFeatureKey)
+>(helloResponseFeatureKey);
 
 export const selectHelloResponseEntitiesState = createSelector(
     selectHelloResponseState,
     (state) => state
-)
+);

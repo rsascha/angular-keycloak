@@ -4,29 +4,29 @@ import { HelloResponseComponent } from './hello-response.component';
 import { Store, StoreModule } from '@ngrx/store';
 
 describe('HelloResponseComponent', () => {
-  let component: HelloResponseComponent;
-  let fixture: ComponentFixture<HelloResponseComponent>;
-  let store: Store;
+    let component: HelloResponseComponent;
+    let fixture: ComponentFixture<HelloResponseComponent>;
+    let store: Store;
 
-  beforeEach(async() => {
-    TestBed.configureTestingModule({
-      imports: [ StoreModule.forRoot({}) ],
-      declarations: [ HelloResponseComponent ]
+    beforeEach(async () => {
+        TestBed.configureTestingModule({
+            imports: [StoreModule.forRoot({})],
+            declarations: [HelloResponseComponent],
+        });
+
+        await TestBed.compileComponents();
     });
 
-    await TestBed.compileComponents();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HelloResponseComponent);
+        component = fixture.componentInstance;
+        store = TestBed.inject(Store);
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HelloResponseComponent);
-    component = fixture.componentInstance;
-    store = TestBed.inject(Store);
+        spyOn(store, 'dispatch').and.callThrough();
+        fixture.detectChanges();
+    });
 
-    spyOn(store, 'dispatch').and.callThrough();
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

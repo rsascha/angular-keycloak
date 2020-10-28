@@ -1,13 +1,13 @@
-import { createReducer, on } from '@ngrx/store'
-import { HelloResponseActions } from '../actions/'
+import { createReducer, on } from '@ngrx/store';
+import { HelloResponseActions } from '../actions/';
 
-export const helloResponseFeatureKey = 'helloResponse'
+export const helloResponseFeatureKey = 'helloResponse';
 
 export interface State {
-    loading: boolean
-    success: boolean
-    error: boolean
-    data: string
+    loading: boolean;
+    success: boolean;
+    error: boolean;
+    data: string;
 }
 
 export const initialState: State = {
@@ -15,7 +15,7 @@ export const initialState: State = {
     success: false,
     error: false,
     data: null,
-}
+};
 
 export const reducer = createReducer(
     initialState,
@@ -32,4 +32,4 @@ export const reducer = createReducer(
         ...state,
         error: error,
     }))
-)
+);
