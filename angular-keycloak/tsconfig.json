@@ -15,6 +15,9 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      // I need to find out how to configure this: "@angular-keycloak/*":["./src/app/*"]
+    }
   }
 }

@@ -1,9 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Store } from '@ngrx/store'
-import { Observable } from 'rxjs'
-import { ApiActions } from './app.actions'
-import { ApiState } from './app.reducer'
-import { KeycloakService } from './keycloak.service'
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { KeycloakService } from './keycloak.service';
 
 @Component({
     selector: 'app-root',
@@ -12,21 +10,20 @@ import { KeycloakService } from './keycloak.service'
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-    title = 'angular-keycloak'
-    loginName$: Observable<string>
-    apiState$: Observable<boolean>
-    apiData$: Observable<string>
+    title = 'angular-keycloak';
+    loginName$: Observable<string>;
+    apiState$: Observable<boolean>;
+    apiData$: Observable<string>;
 
     constructor(
-        private keycloak: KeycloakService,
-        private store: Store<{ api: ApiState }>
+        private keycloak: KeycloakService //private store: Store<{ api: ApiState }>
     ) {
-        this.loginName$ = this.keycloak.getUserName()
-        this.apiState$ = this.store.select((state) => state.api.success)
-        this.apiData$ = this.store.select((state) => state.api.data)
+        this.loginName$ = this.keycloak.getUserName();
+        // this.apiState$ = this.store.select((state) => state.api.success)
+        // this.apiData$ = this.store.select((state) => state.api.data)
     }
 
     load() {
-        this.store.dispatch({ type: ApiActions.Load })
+        //this.store.dispatch({ type: ApiActions.Load })
     }
 }
